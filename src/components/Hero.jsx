@@ -162,11 +162,11 @@ export default function Hero() {
           {profile.resumeUrl && (
             <a
               href={profile.resumeUrl}
-              download
-              className="inline-flex items-center justify-center gap-2 px-1 py-3.5 font-mono text-sm text-ink-500 transition-colors hover:text-accent-400"
+              download={profile.resumeFileName}
+              className="group inline-flex items-center justify-center gap-2.5 border border-noir-500 px-6 py-3.5 font-mono text-sm text-ink-300 transition-colors duration-300 hover:border-accent-500 hover:text-accent-400"
             >
-              <Download className="h-4 w-4" />
-              Resume
+              <Download className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+              My Resume
             </a>
           )}
         </Reveal>

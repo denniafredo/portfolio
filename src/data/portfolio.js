@@ -16,7 +16,8 @@ export const profile = {
   email: 'denniafredo@gmail.com',
   location: 'Indonesia',
   availability: 'Open for freelance & full-time',
-  resumeUrl: '', // contoh: '/denni-afredo-cv.pdf' — kosongkan untuk menyembunyikan tombol
+  resumeUrl: '/denni-afredo-cv.pdf', // file ada di /public — kosongkan untuk menyembunyikan tombol
+  resumeFileName: 'Denni-Afredo-CV.pdf', // nama file saat di-download user
 };
 
 export const navLinks = [
