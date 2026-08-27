@@ -71,7 +71,6 @@ export default function Hero() {
             alt={`${profile.name} at work`}
             label="about-cover.jpg"
             className="notched-frame aspect-[4/3] w-full sm:aspect-[16/9] md:aspect-[13/5]"
-            imgClassName="grayscale transition-[filter] duration-700 hover:grayscale-0"
           />
 
           {/*
