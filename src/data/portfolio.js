@@ -301,6 +301,38 @@ export const moreProjects = [
   },
 ];
 
+/* ------------------------------------------------------- TANPA DETAIL PAGE
+ * `otherWork` tampil sebagai kartu ringkas di bawah accordion. Sengaja TIDAK
+ * masuk `allProjects`, jadi tidak punya halaman detail, galeri, atau route.
+ * Cukup title / subtitle / description; `tags` & `liveUrl` opsional.
+ * ---------------------------------------------------------------------- */
+export const otherWork = [
+  {
+    id: 'mtfa',
+    title: 'MTFA',
+    subtitle: 'Muslimin Trust Fund Association',
+    description: 'CRM system for managing financial assistance programs.',
+    tags: [],
+    liveUrl: '',
+  },
+  {
+    id: 'bcf',
+    title: 'BCF',
+    subtitle: 'Breast Cancer Foundation',
+    description: 'Volunteer management and donation system for a breast cancer support foundation in Singapore.',
+    tags: [],
+    liveUrl: 'https://bcf.org.sg/',
+  },
+  {
+    id: 'wa-bot',
+    title: 'WhatsApp Bot Automation',
+    subtitle: 'Conversational Automation',
+    description: 'WhatsApp bot that automates message flows and routine replies.',
+    tags: [],
+    liveUrl: '',
+  },
+];
+
 /** Dipakai halaman detail & navigasi "next project". */
 export const allProjects = [...projects, ...moreProjects];
 

@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { moreProjects, projects } from '../data/portfolio'
 import Accordion from './Accordion'
 import Frame from './Frame'
+import OtherWork from './OtherWork'
 import { Code, ExternalLink } from './Icons'
 import Reveal from './Reveal'
 import SectionHeading from './SectionHeading'
@@ -121,6 +122,8 @@ export default function Projects() {
             </div>
           </div>
         )}
+
+        <OtherWork />
       </div>
     </section>
   )
