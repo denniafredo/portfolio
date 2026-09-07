@@ -358,6 +358,7 @@ export const socials = [
   { label: 'GITHUB', url: 'https://github.com/denniafredo' },
   { label: 'LINKEDIN', url: 'https://www.linkedin.com/in/denni-afredo/' },
   { label: 'INSTAGRAM', url: 'https://instagram.com/denniafredo' },
+  { label: 'WHATSAPP', url: 'https://wa.me/6289653485351' },
 ];
 
 export const footer = {
