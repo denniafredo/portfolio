@@ -199,6 +199,119 @@
   animation: marquee-x 38s linear infinite;
 }
 
+/* ==========================================================================
+   Logo motion — animasi idle untuk logo di kartu project.
+   Dipilih per project lewat field `logoMotion` di portfolio.js.
+   Keyframe hanya menganimasikan `transform` / `filter`, jadi tetap menyatu
+   dengan hover `scale-[1.04]` (Tailwind v4 memakai properti `scale`).
+   ========================================================================== */
+
+/* spin — bola titik Captiv8 berputar pelan, glow-nya berdenyut teal <-> ungu */
+@keyframes logo-spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+@keyframes logo-spin-glow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 8px rgba(94, 234, 212, 0.18));
+  }
+  50% {
+    filter: drop-shadow(0 0 26px rgba(139, 92, 246, 0.38));
+  }
+}
+.logo-spin {
+  animation:
+    logo-spin 32s linear infinite,
+    logo-spin-glow 6s ease-in-out infinite;
+}
+
+/* breathe — Buddha PES melayang pelan seperti tarikan napas meditasi */
+@keyframes logo-breathe {
+  0%,
+  100% {
+    transform: translateY(0);
+    filter: drop-shadow(0 0 0 rgba(255, 204, 128, 0));
+  }
+  50% {
+    transform: translateY(-6px);
+    filter: drop-shadow(0 0 22px rgba(255, 204, 128, 0.16));
+  }
+}
+.logo-breathe {
+  animation: logo-breathe 6.5s ease-in-out infinite;
+}
+
+/* tilt — lencana JHH bergoyang 3D mengikuti lintasan elips (8 titik ≈ sinus) */
+@keyframes logo-tilt {
+  0%,
+  100% {
+    transform: perspective(600px) rotateX(5deg) rotateY(0deg);
+  }
+  12.5% {
+    transform: perspective(600px) rotateX(3.5deg) rotateY(11deg);
+  }
+  25% {
+    transform: perspective(600px) rotateX(0deg) rotateY(16deg);
+  }
+  37.5% {
+    transform: perspective(600px) rotateX(-3.5deg) rotateY(11deg);
+  }
+  50% {
+    transform: perspective(600px) rotateX(-5deg) rotateY(0deg);
+  }
+  62.5% {
+    transform: perspective(600px) rotateX(-3.5deg) rotateY(-11deg);
+  }
+  75% {
+    transform: perspective(600px) rotateX(0deg) rotateY(-16deg);
+  }
+  87.5% {
+    transform: perspective(600px) rotateX(3.5deg) rotateY(-11deg);
+  }
+}
+.logo-tilt {
+  animation: logo-tilt 9s linear infinite;
+}
+
+/* hop — ikon app PHM melompat seperti app yang di-launch dari dock.
+   Easing per segmen: naik = ease-out, turun = ease-in (biar terasa gravitasi). */
+@keyframes logo-hop {
+  0%,
+  50% {
+    transform: none;
+  }
+  56% {
+    transform: scale(1.07, 0.92); /* ancang-ancang */
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  70% {
+    transform: translateY(-11%) scale(0.96, 1.05); /* puncak */
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  80% {
+    transform: scale(1.06, 0.93); /* mendarat */
+    animation-timing-function: cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  87% {
+    transform: translateY(-3%); /* pantulan kecil */
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  93% {
+    transform: scale(1.02, 0.98);
+  }
+  100% {
+    transform: none;
+  }
+}
+.logo-hop {
+  /* Logo square + object-contain selalu mengisi tinggi frame, jadi
+     dasar elemen = dasar logo -> squash bertumpu di "lantai". */
+  transform-origin: 50% 100%;
+  animation: logo-hop 4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -210,7 +323,11 @@
   }
   .caret,
   .marquee-track,
-  .page-enter {
+  .page-enter,
+  .logo-spin,
+  .logo-breathe,
+  .logo-tilt,
+  .logo-hop {
     animation: none;
   }
   *,

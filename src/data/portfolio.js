@@ -137,6 +137,10 @@ export const experiences = [
  * `projects`      -> tampil sebagai kartu besar (project unggulan)
  * `moreProjects`  -> tampil sebagai accordion di bawahnya
  * Mau menukar posisi? Cukup pindahkan objeknya antar dua array ini.
+ *
+ * `logoMotion` (opsional, khusus kartu) -> animasi idle logo di thumbnail:
+ *   'spin' | 'breathe' | 'tilt' | 'hop'. Hapus field-nya untuk logo diam.
+ *   Definisi animasinya ada di src/index.css (bagian "Logo motion").
  */
 export const galleryBase = '/images/projects';
 
@@ -152,6 +156,7 @@ export const projects = [
       'Warehouse inventory system for automotive parts. Staff photograph a part, the system extracts its attributes automatically, and a reviewer verifies the record before it is assigned to a bin location. Batch processing keeps large intake runs organised, so stock data stays accurate across the warehouse.',
     tags: ['Node.js', 'Express.js', 'Sequelize', 'AI Extraction'],
     image: '/images/project-captiv8.jpg',
+    logoMotion: 'spin',
     cover: '/images/project-captiv8.jpg',
     details: [
       { key: 'ROLE', value: 'Fullstack Developer' },
@@ -176,6 +181,7 @@ export const projects = [
       'Bilingual (English / 中文) point-of-sale and donation system for Poh Ern Shih Temple, Singapore. Staff take orders for offerings and prayer services from a catalogue, settle them via PayNow, cash, or card, and devotees can donate through a separate flow with their own receipt and record.',
     tags: ['Node.js', 'Express.js', 'Sequelize', 'PayNow', 'Bilingual UI'],
     image: '/images/project-pes.jpg',
+    logoMotion: 'breathe',
     cover: '/images/project-pes.jpg',
     details: [
       { key: 'ROLE', value: 'Fullstack Developer' },
@@ -201,6 +207,7 @@ export const projects = [
       'CRM system for handling case records and rehabilitation programs for ex-prisoners. Centralises client history, program progress, and follow-up scheduling so case workers can track outcomes over time.',
     tags: ['Node.js', 'Express.js', 'Sequelize', 'Dashboard Analytics'],
     image: '/images/project-jhh.jpg',
+    logoMotion: 'tilt',
     cover: '/images/project-jhh.jpg',
     details: [
       { key: 'ROLE', value: 'Fullstack Developer' },
@@ -220,6 +227,7 @@ export const projects = [
       'Mobile app used by salesmen in the field. Each store visit is checked in with GPS so supervisors can verify coverage, while sales orders and invoices are handled on the same device. Supervisors get receivables broken down by ageing bucket and a target-vs-achievement leaderboard per salesman.',
     tags: ['Flutter', 'Dart', 'REST API', 'GPS Tracking'],
     image: '/images/project-phm.jpg',
+    logoMotion: 'hop',
     cover: '/images/project-phm.jpg',
     details: [
       { key: 'ROLE', value: 'Fullstack Developer' },

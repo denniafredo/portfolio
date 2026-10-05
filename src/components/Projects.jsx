@@ -22,7 +22,9 @@ function ProjectCard({ project, index }) {
           label={project.image?.split('/').pop()}
           fit="contain"
           className="aspect-[16/10] w-full p-8 sm:p-10"
-          imgClassName="transition-all duration-700 group-hover:scale-[1.04]"
+          imgClassName={`transition-all duration-700 group-hover:scale-[1.04] ${
+            project.logoMotion ? `logo-${project.logoMotion}` : ''
+          }`}
         />
         <span
           aria-hidden="true"
