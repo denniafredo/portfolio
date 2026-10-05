@@ -1,0 +1,121 @@
+/* Motion phm — dihasilkan dengan pixel2motion (https://github.com/nolangz/pixel2motion).
+   Reduced motion -> logo langsung tampil di frame akhir (tanpa animasi). */
+@media (prefers-reduced-motion: no-preference) {
+  /* PHM logo motion — Pixel2Motion v2
+   * Reveal: one shared 1700ms clock (T_end = 1700ms), delay 0, fill both.
+   * Phases (ms): stage-hold 0-200 | bg 0-260 | icon pop 200-920 | letters P 560-1080, H 630-1150,
+   *              M 700-1220 | check-in ping 1040-1700.
+   * Idle: #phm-pulse soft GPS ping, 4800ms period, starts at T_end, 0% == 100% (invisible).
+   * Keyframe easings are literal cubic-bezier (custom properties do not resolve there);
+   * token names are given in comments. No prefers-reduced-motion query here (wrapped by host).
+   */
+  #phm-logo {
+    --phm-reveal: 1700ms;
+    --phm-idle: 4800ms;
+  }
+  #phm-bg {
+    animation: phm-bg-in var(--phm-reveal) linear 0ms 1 both;
+  }
+  #phm-icon {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: phm-pop var(--phm-reveal) linear 0ms 1 both;
+  }
+  .phm-letter {
+    transform-box: fill-box;
+    transform-origin: 50% 100%; /* baseline pivot: lean swings the tops, feet stay planted */
+  }
+  #phm-p { animation: phm-dash-p var(--phm-reveal) linear 0ms 1 both, phm-arc-p var(--phm-reveal) linear 0ms 1 both, phm-fade-p var(--phm-reveal) linear 0ms 1 both; }
+  #phm-h { animation: phm-dash-h var(--phm-reveal) linear 0ms 1 both, phm-arc-h var(--phm-reveal) linear 0ms 1 both, phm-fade-h var(--phm-reveal) linear 0ms 1 both; }
+  #phm-m { animation: phm-dash-m var(--phm-reveal) linear 0ms 1 both, phm-arc-m var(--phm-reveal) linear 0ms 1 both, phm-fade-m var(--phm-reveal) linear 0ms 1 both; }
+  .phm-ring {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  #phm-ping {
+    animation: phm-ping-grow var(--phm-reveal) linear 0ms 1 both, phm-ping-fade var(--phm-reveal) linear 0ms 1 both;
+  }
+  #phm-pulse {
+    animation: phm-pulse var(--phm-idle) linear var(--phm-reveal) infinite both;
+  }
+
+
+  @keyframes phm-bg-in {
+    0% { opacity: 0; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --phm-ease-fade */ }
+    15.29%, 100% { opacity: 1; }
+  }
+
+  @keyframes phm-pop {
+    0%, 11.76% { opacity: 0; transform: scale(0.5); animation-timing-function: cubic-bezier(0.33, 0, 0.67, 1); /* --phm-ease-coil */ }
+    19.41% { opacity: 1; transform: scale(0.45); animation-timing-function: cubic-bezier(0.3, 0, 0.1, 1); /* --phm-ease-pop */ }
+    35.88% { opacity: 1; transform: scale(1.06); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); /* --phm-ease-swing */ }
+    45.29% { opacity: 1; transform: scale(0.985); animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* --phm-ease-settle */ }
+    54.12%, 100% { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes phm-dash-p {
+    0%, 32.94% { transform: translateX(-20px) skewX(-14deg); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); /* --phm-ease-dash */ }
+    51.88% { transform: translateX(1.8px) skewX(3deg); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); /* --phm-ease-swing */ }
+    63.53%, 100% { transform: translateX(0px) skewX(0deg); }
+  }
+
+  @keyframes phm-arc-p {
+    0%, 32.94% { translate: 0px 6px; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --phm-ease-rise */ }
+    46.71%, 100% { translate: 0px 0px; }
+  }
+
+  @keyframes phm-fade-p {
+    0%, 32.94% { opacity: 0; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --phm-ease-fade */ }
+    38.47%, 100% { opacity: 1; }
+  }
+
+  @keyframes phm-dash-h {
+    0%, 37.06% { transform: translateX(-20px) skewX(-14deg); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); /* --phm-ease-dash */ }
+    56% { transform: translateX(1.8px) skewX(3deg); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); /* --phm-ease-swing */ }
+    67.65%, 100% { transform: translateX(0px) skewX(0deg); }
+  }
+
+  @keyframes phm-arc-h {
+    0%, 37.06% { translate: 0px 6px; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --phm-ease-rise */ }
+    50.82%, 100% { translate: 0px 0px; }
+  }
+
+  @keyframes phm-fade-h {
+    0%, 37.06% { opacity: 0; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --phm-ease-fade */ }
+    42.59%, 100% { opacity: 1; }
+  }
+
+  @keyframes phm-dash-m {
+    0%, 41.18% { transform: translateX(-20px) skewX(-14deg); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); /* --phm-ease-dash */ }
+    60.12% { transform: translateX(1.8px) skewX(3deg); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); /* --phm-ease-swing */ }
+    71.76%, 100% { transform: translateX(0px) skewX(0deg); }
+  }
+
+  @keyframes phm-arc-m {
+    0%, 41.18% { translate: 0px 6px; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --phm-ease-rise */ }
+    54.94%, 100% { translate: 0px 0px; }
+  }
+
+  @keyframes phm-fade-m {
+    0%, 41.18% { opacity: 0; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --phm-ease-fade */ }
+    46.71%, 100% { opacity: 1; }
+  }
+
+  @keyframes phm-ping-grow {
+    0%, 61.18% { transform: scale(1); animation-timing-function: cubic-bezier(0.2, 0.6, 0.35, 1); /* --phm-ease-wave */ }
+    100% { transform: scale(1.19); }
+  }
+
+  @keyframes phm-ping-fade {
+    0%, 61.18% { opacity: 0; animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --phm-ease-fade */ }
+    65.88% { opacity: 0.4; animation-timing-function: cubic-bezier(0.33, 0, 0.2, 1); /* --phm-ease-decay */ }
+    100% { opacity: 0; }
+  }
+
+  @keyframes phm-pulse {
+    0%, 60% { opacity: 0; transform: scale(1); animation-timing-function: cubic-bezier(0, 0, 0.2, 1); /* --phm-ease-fade */ }
+    64% { opacity: 0.2; transform: scale(1.035); animation-timing-function: cubic-bezier(0.25, 0.6, 0.4, 1); /* --phm-ease-idle */ }
+    96% { opacity: 0; transform: scale(1.14); }
+    100% { opacity: 0; transform: scale(1); }
+  }
+}

@@ -1,0 +1,13 @@
+<svg id="phm-logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 351 351" role="img" aria-label="PHM" aria-hidden="true" focusable="false">
+  <rect id="phm-bg" width="351" height="351" fill="#1a1221"/>
+  <rect id="phm-pulse" class="phm-ring" x="43.84" y="38.05" width="262.23" height="262.67" rx="50.25" fill="none" stroke="#fff" stroke-width="3" opacity="0"/>
+  <rect id="phm-ping" class="phm-ring" x="43.84" y="38.05" width="262.23" height="262.67" rx="50.25" fill="none" stroke="#fff" stroke-width="4" opacity="0"/>
+  <g id="phm-icon">
+    <rect id="phm-tile" x="43.84" y="38.05" width="262.23" height="262.67" rx="50.25" fill="#fff"/>
+    <g id="phm-letters" fill="#000">
+      <path id="phm-m" class="phm-letter" d="M195.99 205.32L210.28 125.56L225.42 125.56L231.95 170.2L255.67 125.56L270.54 125.56L256.25 205.32L240.61 205.32L248.23 162.74L233.55 193.33L223.23 193.33L219.03 165.49L211.9 205.32Z"/>
+      <path id="phm-h" class="phm-letter" d="M139.13 205.32L153.42 125.56L169.89 125.56L164.34 156.58L175.24 156.58L180.79 125.56L197.15 125.56L182.87 205.32L166.51 205.32L172.25 173.28L161.35 173.28L155.61 205.32Z"/>
+      <path id="phm-p" class="phm-letter" d="M86.69 205.32L100.97 125.56L125.81 125.56C136.43 125.56 142.31 134.64 140.01 147.47L139.19 152.06C136.79 165.44 128.8 175.27 120.12 175.49L107.78 175.81L102.49 205.32ZM113.92 139.19L109.94 161.44L114.46 161.44C118.2 161.44 122.1 157.77 122.86 153.54L123.99 147.24C124.77 142.91 123.52 139.19 121.29 139.19Z"/>
+    </g>
+  </g>
+</svg>

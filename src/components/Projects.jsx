@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import { moreProjects, projects } from '../data/portfolio'
+import { animatedLogos } from '../logos'
 import Accordion from './Accordion'
+import AnimatedLogo from './AnimatedLogo'
 import Frame from './Frame'
 import OtherWork from './OtherWork'
 import { Code, ExternalLink } from './Icons'
@@ -16,16 +18,25 @@ function ProjectCard({ project, index }) {
     >
       {/* Thumbnail */}
       <div className="relative overflow-hidden border-b border-noir-700">
-        <Frame
-          src={project.image}
-          alt={`Preview ${project.title}`}
-          label={project.image?.split('/').pop()}
-          fit="contain"
-          className="aspect-[16/10] w-full p-8 sm:p-10"
-          imgClassName={`transition-all duration-700 group-hover:scale-[1.04] ${
-            project.logoMotion ? `logo-${project.logoMotion}` : ''
-          }`}
-        />
+        {animatedLogos[project.logoMotion] ? (
+          <div className="aspect-[16/10] w-full bg-noir-850 p-8 sm:p-10">
+            <AnimatedLogo
+              id={project.logoMotion}
+              label={`Logo ${project.title}`}
+              delay={index * 120}
+              className="mx-auto aspect-square h-full transition-transform duration-700 group-hover:scale-[1.04]"
+            />
+          </div>
+        ) : (
+          <Frame
+            src={project.image}
+            alt={`Preview ${project.title}`}
+            label={project.image?.split('/').pop()}
+            fit="contain"
+            className="aspect-[16/10] w-full p-8 sm:p-10"
+            imgClassName="transition-all duration-700 group-hover:scale-[1.04]"
+          />
+        )}
         <span
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 bg-accent-500/0 transition-colors duration-500 group-hover:bg-accent-500/10"

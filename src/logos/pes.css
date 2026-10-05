@@ -1,0 +1,129 @@
+/* Motion pes — dihasilkan dengan pixel2motion (https://github.com/nolangz/pixel2motion).
+   Reduced motion -> logo langsung tampil di frame akhir (tanpa animasi). */
+@media (prefers-reduced-motion: no-preference) {
+  /* PES (Poh Ern Shih) - Buddha head reveal. Personality: serene, reverent, luminous.
+     ONE shared clock: every reveal animation runs var(--pes-dur) = 1800ms from t=0 with
+     delay 0; phases live in keyframe percentages (pct = ms / 1800). T_end = 1800ms.
+     Idle loop (#pes-jewel-halo) starts at T_end, 3600ms period, seamless 0% == 100%.
+     Keyframe easings are LITERAL cubic-bezier() values (var() is dropped inside @keyframes).
+     No squash/stretch, no overshoot, no bounce: opacity + soft focus + a 1-1.5% rise only. */
+
+  #pes-logo {
+    --pes-dur: 1800ms;    /* reveal clock = T_end */
+    --pes-idle: 3600ms;   /* jewel glow breathing period */
+    /* easing tokens (documentation; literal copies are written in every keyframe) */
+    --pes-ease-emerge: cubic-bezier(0.37, 0, 0.2, 1);   /* soft start, long unhurried settle */
+    --pes-ease-breathe: cubic-bezier(0.45, 0, 0.55, 1); /* symmetric in/out for light swells */
+    --pes-ease-stage: cubic-bezier(0.42, 0, 0.58, 1);   /* stage (background) fade */
+  }
+
+  /* ---------------------------------------------------------------- reveal (shared clock) */
+  #pes-bg           { animation: pes-bg-in     var(--pes-dur) linear both; }
+  #pes-aura         { animation: pes-aura      var(--pes-dur) linear both; }
+  #pes-face         { animation: pes-face-in   var(--pes-dur) linear both; }
+  #pes-ear-l,
+  #pes-ear-r        { animation: pes-ears-in   var(--pes-dur) linear both; }
+  #pes-curls-r1     { animation: pes-curls-r1  var(--pes-dur) linear both; }
+  #pes-curls-r2     { animation: pes-curls-r2  var(--pes-dur) linear both; }
+  #pes-curls-r3     { animation: pes-curls-r3  var(--pes-dur) linear both; }
+  #pes-curls-r4     { animation: pes-curls-r4  var(--pes-dur) linear both; }
+  #pes-curls-r5     { animation: pes-curls-r5  var(--pes-dur) linear both; }
+  #pes-curls-r6     { animation: pes-curls-r6  var(--pes-dur) linear both; }
+  #pes-jewel        { animation: pes-jewel-in  var(--pes-dur) linear both; }
+  #pes-jewel-bloom  { animation: pes-bloom     var(--pes-dur) linear both; }
+
+  /* --------------------------------------------------------------- idle (after T_end) */
+  #pes-jewel-halo {
+    animation: pes-halo-breathe var(--pes-idle) cubic-bezier(0.45, 0, 0.55, 1) var(--pes-dur) infinite both;
+  }
+
+  /* Staging: the dark tile settles in under the card fade (0-360ms). */
+  @keyframes pes-bg-in {
+    0%   { opacity: 0; animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1); /* --pes-ease-stage */ }
+    20%  { opacity: 1; }
+    100% { opacity: 1; }
+  }
+
+  /* Anticipation: light gathers where the head will appear (100ms, under the staging hold),
+     peaks as the face forms (600ms), then recedes into it (1450ms). Base opacity 0 = static. */
+  @keyframes pes-aura {
+    0%, 5.556%  { opacity: 0; animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); /* --pes-ease-breathe */ }
+    33.333%     { opacity: 0.45; animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); /* --pes-ease-breathe */ }
+    80.556%     { opacity: 0; }
+    100%        { opacity: 0; }
+  }
+
+  /* Primary (root of the drag hierarchy): the face emerges 260-1060ms. */
+  @keyframes pes-face-in {
+    0%, 14.444% {
+      opacity: 0; transform: translateY(4px); filter: blur(3px);
+      animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1); /* --pes-ease-emerge */
+    }
+    58.889%, 100% { opacity: 1; transform: none; filter: none; }
+  }
+
+  /* Follow-through: the long ears trail the face by 80ms (340-1140ms). */
+  @keyframes pes-ears-in {
+    0%, 18.889% {
+      opacity: 0; transform: translateY(4px); filter: blur(3px);
+      animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1); /* --pes-ease-emerge */
+    }
+    63.333%, 100% { opacity: 1; transform: none; filter: none; }
+  }
+
+  /* Overlapping action: hair curls rise row by row toward the crown, 520ms per row,
+     70ms stagger (13% of a row). r1 = beside the ears ... r6 = beneath the jewel. */
+  @keyframes pes-curls-r1 {   /* 720-1240ms */
+    0%, 40% { opacity: 0; transform: translateY(3px); filter: blur(1.5px);
+      animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1); /* --pes-ease-emerge */ }
+    68.889%, 100% { opacity: 1; transform: none; filter: none; }
+  }
+  @keyframes pes-curls-r2 {   /* 790-1310ms */
+    0%, 43.889% { opacity: 0; transform: translateY(3px); filter: blur(1.5px);
+      animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1); /* --pes-ease-emerge */ }
+    72.778%, 100% { opacity: 1; transform: none; filter: none; }
+  }
+  @keyframes pes-curls-r3 {   /* 860-1380ms */
+    0%, 47.778% { opacity: 0; transform: translateY(3px); filter: blur(1.5px);
+      animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1); /* --pes-ease-emerge */ }
+    76.667%, 100% { opacity: 1; transform: none; filter: none; }
+  }
+  @keyframes pes-curls-r4 {   /* 930-1450ms */
+    0%, 51.667% { opacity: 0; transform: translateY(3px); filter: blur(1.5px);
+      animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1); /* --pes-ease-emerge */ }
+    80.556%, 100% { opacity: 1; transform: none; filter: none; }
+  }
+  @keyframes pes-curls-r5 {   /* 1000-1520ms */
+    0%, 55.556% { opacity: 0; transform: translateY(3px); filter: blur(1.5px);
+      animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1); /* --pes-ease-emerge */ }
+    84.444%, 100% { opacity: 1; transform: none; filter: none; }
+  }
+  @keyframes pes-curls-r6 {   /* 1070-1590ms */
+    0%, 59.444% { opacity: 0; transform: translateY(3px); filter: blur(1.5px);
+      animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1); /* --pes-ease-emerge */ }
+    88.333%, 100% { opacity: 1; transform: none; filter: none; }
+  }
+
+  /* The crowning beat: the jewel kindles 1160-1720ms (the one exaggerated rise, 6px). */
+  @keyframes pes-jewel-in {
+    0%, 64.444% {
+      opacity: 0; transform: translateY(6px); filter: blur(2.5px);
+      animation-timing-function: cubic-bezier(0.37, 0, 0.2, 1); /* --pes-ease-emerge */
+    }
+    95.556%, 100% { opacity: 1; transform: none; filter: none; }
+  }
+
+  /* Secondary action: a soft bloom of light around the jewel 1240-1800ms, back to 0 at T_end. */
+  @keyframes pes-bloom {
+    0%, 68.889% { opacity: 0; animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); /* --pes-ease-breathe */ }
+    83.333%     { opacity: 0.8; animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); /* --pes-ease-breathe */ }
+    100%        { opacity: 0; }
+  }
+
+  /* Idle: the jewel's glow breathes (0 -> 0.32 -> 0). 0% == 100% == static (opacity 0). */
+  @keyframes pes-halo-breathe {
+    0%   { opacity: 0; }
+    50%  { opacity: 0.32; }
+    100% { opacity: 0; }
+  }
+}
